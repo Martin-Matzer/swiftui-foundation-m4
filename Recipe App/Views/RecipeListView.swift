@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecipeAppView: View {
+struct RecipeListView: View {
     
     @ObservedObject var model = RecipeModel()
     
@@ -45,6 +45,6 @@ struct RecipeAppView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeAppView()
+        RecipeListView()
     }
 }
