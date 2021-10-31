@@ -9,7 +9,8 @@ import SwiftUI
 
 struct RecipeListView: View {
     
-    @ObservedObject var model = RecipeModel()
+    // Create a property which is linked to the data of the RecipeModel instance from the Tab-View, because this is a Sub-View of the Tab-View
+    @EnvironmentObject var model:RecipeModel
     
     var body: some View {
         

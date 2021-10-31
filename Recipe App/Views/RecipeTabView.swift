@@ -13,11 +13,11 @@ struct RecipeTabView: View {
         
         TabView {
             
-            Text("Feature View")
+            RecipeFeaturedView()
                 .tabItem {
                     VStack {
                         Image(systemName: "star.fill")
-                        Text("Feature")
+                        Text("Featured")
                     }
                 }
             
@@ -29,10 +29,7 @@ struct RecipeTabView: View {
                     }
                 }
             
-            
-            
-        }
-        
+        }.environmentObject(RecipeModel())  // Create an enviroment object of RecipeModel -> all Sub-Views can access to this instance of RecipeModel
         
     }
 }
