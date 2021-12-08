@@ -11,6 +11,7 @@ struct RecipeFeaturedView: View {
     
     // Create a property which is linked to the data of the RecipeModel instance in the Tab-View
     @EnvironmentObject var model:RecipeModel
+    @State var isDetailViewShowing = false
     
     var body: some View {
         
@@ -32,24 +33,37 @@ struct RecipeFeaturedView: View {
                     // Only show those which are featured
                     if model.recipes[index].featured {
                         
-                        // Recipe card
-                        ZStack {
-      
-                            Rectangle()
-                                .foregroundColor(.white)
+                        // Recipe card button
+                        Button {
+                            self.isDetailViewShowing = true
+                        } label: {
                             
-                            VStack {
-                                Image(model.recipes[index].image)
-                                    .resizable()
-                                    .clipped()
-                                    .aspectRatio(contentMode: .fill)
+                            // Recipe card
+                            ZStack {
+          
+                                Rectangle()
+                                    .foregroundColor(.white)
                                 
-                                Text(model.recipes[index].name)
-                                    .font(.title)
-                                    .padding(5)
+                                VStack {
+                                    Image(model.recipes[index].image)
+                                        .resizable()
+                                        .clipped()
+                                        .aspectRatio(contentMode: .fill)
+                                    
+                                    Text(model.recipes[index].name)
+                                        .font(.title)
+                                        .padding(5)
+                                }
+                                
                             }
                             
-                        }.frame(width: geo.size.width - 50, height: geo.size.height - 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                        }
+                        .sheet(isPresented: $isDetailViewShowing) {
+                            // Show recipe detail view
+                            RecipeDetailView(recipe: model.recipes[index])
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .frame(width: geo.size.width - 50, height: geo.size.height - 200, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .cornerRadius(15)
                         .shadow(color: Color(.sRGB, red: 0, green: 0, blue: 0, opacity: 0.6), radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, x: -6, y: 6)
                     }
