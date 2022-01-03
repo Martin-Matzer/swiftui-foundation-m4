@@ -21,7 +21,7 @@ struct RecipeListView: View {
                 Text("Recipe List")
                     .bold()
                     .padding(.top)
-                    .font(.largeTitle)
+                    .font(Font.custom("Avenir Heavy", size: 30))
                 
                 ScrollView {
                     
@@ -33,6 +33,7 @@ struct RecipeListView: View {
                                 destination: RecipeDetailView(recipe: r),
                                 label: {
                                     // MARK: Row item
+                                
                                     HStack(spacing: 20.0) {
                                         Image(r.image)
                                             .resizable()
@@ -41,8 +42,14 @@ struct RecipeListView: View {
                                             .clipped()
                                             .cornerRadius(5.0)
                                         
-                                        Text(r.name)
+                                        VStack(alignment: .leading) {
+                                            Text(r.name)
+                                                .font(Font.custom("Avenir Heavy", size: 18))
+                                            RecipeHighlights(highlights: r.highlights)
+                                        }.foregroundColor(Color.black)
+                                        
                                     }
+
                                 })
                         }
                         
